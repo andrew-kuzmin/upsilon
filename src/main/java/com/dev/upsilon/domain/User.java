@@ -1,13 +1,29 @@
-package com.dev.upsilon.model;
+package com.dev.upsilon.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
     private String firstName;
     private String lastName;
     private String userName;
     private String planeTextPassword;
     private String hashedPassword;
+
+    public User(String firstName, String lastName, String userName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.planeTextPassword = "password";
+        this.hashedPassword = String.valueOf(planeTextPassword.hashCode());
+    }
 
     public String getId() {
         return id;

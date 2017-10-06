@@ -1,38 +1,18 @@
 package com.dev.upsilon.service;
 
-import com.dev.upsilon.db.DatabaseClass;
-import com.dev.upsilon.model.User;
+import com.dev.upsilon.domain.User;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-public class UserService {
+public interface UserService {
 
-    private Map<String, User> usersMap = DatabaseClass.getUsers();
+    Iterable getAllUsers();
 
-    public List<User> getAllUsers(){
-        return new ArrayList<User>(usersMap.values());
-    }
+    Optional getUserById(String id);
 
-    public User getUserById(String id){
-        return new User();
-    }
+    User addUser(User User);
 
-    public User addUser(User User) {
-        User.setId(String.valueOf(usersMap.size() + 1));
-        usersMap.put(User.getId(), User);
-        return User;
-    }
+    User updateUser(User User);
 
-    public User updateUser(User User) {
-        usersMap.put(User.getId(), User);
-        return User;
-    }
-
-    public User removeUser(String id) {
-        return usersMap.remove(id);
-    }
-
-
+    void removeUser(String id);
 }
