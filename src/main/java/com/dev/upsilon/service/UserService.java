@@ -6,13 +6,8 @@ import com.dev.upsilon.exception.UserDoesNotExistException;
 
 public interface UserService {
 
-    Iterable getAllUsers();
-
-    User getUserByUserName(String userName) throws UserDoesNotExistException;
+    User getUserByUserName(String userName);
 
     User addUser(User User) throws UserAlreadyExistsException;
 
-    User updateUser(User User);
-
-    void removeUser(String id);
 }

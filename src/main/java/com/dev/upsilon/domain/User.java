@@ -1,34 +1,25 @@
 package com.dev.upsilon.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class User {
 
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
     private String firstName;
     private String lastName;
     private String userName;
-    @JsonIgnore
-    private String planeTextPassword;
+    private String plainTextPassword;
     @JsonIgnore
     private String hashedPassword;
 
-    public User() {  }
+    public User() {
+    }
 
     public User(String firstName, String lastName, String userName, String planeTextPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
-        this.planeTextPassword = planeTextPassword;
+        this.plainTextPassword = planeTextPassword;
         this.hashedPassword = String.valueOf(planeTextPassword.hashCode());
     }
 
@@ -65,12 +56,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPlaneTextPassword() {
-        return planeTextPassword;
+    public String getPlainTextPassword() {
+        return plainTextPassword;
     }
 
-    public void setPlaneTextPassword(String planeTextPassword) {
-        this.planeTextPassword = planeTextPassword;
+    public void setPlainTextPassword(String planeTextPassword) {
+        this.plainTextPassword = planeTextPassword;
     }
 
     public String getHashedPassword() {

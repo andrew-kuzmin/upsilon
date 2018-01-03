@@ -1,4 +1,4 @@
-package com.dev.upsilon.controllers;
+package com.dev.upsilon.controller;
 
 import com.dev.upsilon.domain.User;
 import com.dev.upsilon.exception.UserAlreadyExistsException;
@@ -6,6 +6,8 @@ import com.dev.upsilon.exception.UserDoesNotExistException;
 import com.dev.upsilon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -23,11 +25,11 @@ public class UserController {
         return service.getUserByUserName(userName);
     }
 
-    @PostMapping(path = "/user", produces = "application/json")
-    public User addUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-                        @RequestParam("userName") String userName, @RequestParam("password") String password) throws UserAlreadyExistsException {
-        User newUser = new User(firstName, lastName, userName, password);
-        return service.addUser(newUser);
+    @PostMapping(path = "/user", produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public User addUser(@RequestBody User user){
+
+        return service.addUser(null);
     }
 
 }
