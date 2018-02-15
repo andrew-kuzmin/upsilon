@@ -1,14 +1,14 @@
 package com.dev.upsilon.repository;
 
-import com.dev.upsilon.domain.User;
+import com.dev.upsilon.entity.UserEntity;
 import com.dev.upsilon.exception.UserAlreadyExistsException;
-import org.springframework.lang.Nullable;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepository{
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
-    @Nullable Optional<User> findByUserName(String userName);
+    Optional<UserEntity> findByUserName(String userName);
 
-    User createUser(User user) throws UserAlreadyExistsException;
+    UserEntity save(UserEntity user) throws UserAlreadyExistsException;
 }

@@ -1,6 +1,7 @@
 package com.dev.upsilon.service;
 
-import com.dev.upsilon.domain.User;
+import com.dev.upsilon.dto.UserDTO;
+import com.dev.upsilon.entity.UserEntity;
 import com.dev.upsilon.exception.UserAlreadyExistsException;
 import com.dev.upsilon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private final UserRepository userRepository;
 
     @Autowired
@@ -20,14 +22,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUserName(@NotNull String userName) {
-        Optional<User> userOptional = userRepository.findByUserName(userName);
-        return userOptional.orElse(null);
+    public UserDTO getUserByUserName(@NotNull String userName) {
+        Optional<UserEntity> userOptional = userRepository.findByUserName(userName);
+        return userOptional.map(UserDTO::new).orElse(null);
     }
 
     @Override
-    public User addUser(@NotNull User user) throws UserAlreadyExistsException {
-        return null;
+    public UserDTO addUser(UserEntity user) throws UserAlreadyExistsException {
+        UserEntity userEntity = userRepository.save(new UserEntity(user));
+        return new UserDTO(userEntity);
     }
 
     public String hashPassword(String password) {

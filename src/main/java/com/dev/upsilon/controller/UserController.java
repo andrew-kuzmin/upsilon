@@ -1,13 +1,12 @@
 package com.dev.upsilon.controller;
 
 import com.dev.upsilon.domain.User;
-import com.dev.upsilon.exception.UserAlreadyExistsException;
+import com.dev.upsilon.dto.UserDTO;
+import com.dev.upsilon.entity.UserEntity;
 import com.dev.upsilon.exception.UserDoesNotExistException;
 import com.dev.upsilon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -27,9 +26,9 @@ public class UserController {
 
     @PostMapping(path = "/user", produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public User addUser(@RequestBody User user){
+    public UserDTO addUser(@RequestBody UserEntity user) {
 
-        return service.addUser(null);
+        return service.addUser(user);
     }
 
 }
