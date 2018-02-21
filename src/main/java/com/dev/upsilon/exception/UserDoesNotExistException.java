@@ -1,8 +1,16 @@
 package com.dev.upsilon.exception;
 
-public class UserDoesNotExistException extends Exception {
+/**
+ * @author Andriy Kuzmin
+ */
+
+public class UserDoesNotExistException extends RuntimeException {
+
+    public UserDoesNotExistException(String message) {
+        super(message);
+    }
 
     public UserDoesNotExistException() {
-        super();
+        super("A user with the given username does not exist");
     }
 }

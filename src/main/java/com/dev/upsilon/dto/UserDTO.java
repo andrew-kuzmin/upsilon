@@ -1,11 +1,15 @@
 package com.dev.upsilon.dto;
 
-import com.dev.upsilon.domain.User;
+import com.dev.upsilon.entity.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
+
+/**
+ * @author Andriy Kuzmin
+ */
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,13 +27,13 @@ public class UserDTO extends User {
     @NotBlank
     private String userName;
 
-    public UserDTO() {
+    public UserDTO(User user) {
+        this.setId(user.getId());
+        this.setFirstName(user.getFirstName());
+        this.setLastName(user.getLastName());
+        this.setUserName(user.getUserName());
     }
 
-    public UserDTO(User user) {
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.userName = user.getUserName();
+    public UserDTO() {
     }
 }

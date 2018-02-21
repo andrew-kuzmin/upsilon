@@ -1,13 +1,18 @@
 package com.dev.upsilon.service;
 
 import com.dev.upsilon.dto.UserDTO;
-import com.dev.upsilon.entity.UserEntity;
+import com.dev.upsilon.entity.User;
 import com.dev.upsilon.exception.UserAlreadyExistsException;
+import com.dev.upsilon.exception.UserDoesNotExistException;
+
+/**
+ * @author Andriy Kuzmin
+ */
 
 public interface UserService {
 
-    UserDTO getUserByUserName(String userName);
+    UserDTO getUserByUserName(String userName) throws UserDoesNotExistException;
 
-    UserDTO addUser(UserEntity User) throws UserAlreadyExistsException;
+    UserDTO addUser(User User) throws UserAlreadyExistsException;
 
 }
